@@ -132,7 +132,10 @@ echo "<tr><td><a href='/skills/?skillid=".$row->typeid."'>".$row->typename."</td
 
 
 }
-
+if ($level==0)
+{
+echo "<tr><th>Nothing unlocked.</th></tr>";
+}
 ?>
 </table>
 <?
