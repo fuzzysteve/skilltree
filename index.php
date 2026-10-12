@@ -3,15 +3,15 @@ $expires = 3599;
 header("Pragma: public");
 header("Cache-Control: maxage=".$expires);
 header('Expires: ' . gmdate('D, d M Y H:i:s', time()+$expires) . ' GMT');
-$memcache = new Memcache;
-$memcache->connect('localhost', 11211) or die ("Could not connect");
+$memcache = new Memcached;
+$memcache->addServer('localhost', 11211) or die ("Could not connect");
 
 require_once('db.inc.php');
 ?>
 <html>
 <head>
 <title>Skill unlock information</title>
-  <link href="style.css" rel="stylesheet" type="text/css"/>
+  <link href="style.css?v=3" rel="stylesheet" type="text/css"/>
   <link href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
@@ -25,7 +25,7 @@ require_once('db.inc.php');
 </head>
 <body>
 <?php include('/home/web/fuzzwork/htdocs/menu/menubootstrap.php'); ?>
-<div class="container">
+<div class="container fw-grid">
 
 <p>What does a Skill unlock at its various levels?</p>
 
@@ -115,9 +115,9 @@ if ($level != $row->level)
 {
 if ($level!=0)
 {
-echo "</tgroup>";
+echo "</tbody>";
 }
-echo "<tgroup><tr><th colspan-2>Level ".$row->level."</th></tr>";
+echo "<tbody><tr><th colspan=2 class='fw-group-row'>Level ".$row->level."</th></tr>";
 $level=$row->level;
 }
 if ($row->categoryid==7 or $row->categoryid==6)
@@ -138,7 +138,7 @@ echo "<tr><th>Nothing unlocked.</th></tr>";
 }
 ?>
 </table>
-<?
+<?php
 }
 else
 {
